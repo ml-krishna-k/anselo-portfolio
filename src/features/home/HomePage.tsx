@@ -5,7 +5,7 @@ import { WorkGrid } from './components/WorkGrid';
 import { AboutSection } from './components/AboutSection';
 import { ServicesSection } from './components/ServicesSection';
 import { CertificatesSection } from './components/CertificatesSection';
-import { ContactSection } from './components/ContactSection';
+
 
 export function HomePage() {
     const [isLandingComplete, setIsLandingComplete] = useState(false);
@@ -53,8 +53,7 @@ export function HomePage() {
                     <div id="certificates" className="scroll-mt-24" />
                     <CertificatesSection />
 
-                    <div id="contact" className="scroll-mt-24" />
-                    <ContactSection />
+
                 </div>
             </div>
         </div>
