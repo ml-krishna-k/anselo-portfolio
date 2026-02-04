@@ -18,7 +18,7 @@ export function DynamicHero() {
 
             {/* Background Video Loop */}
             <motion.div
-                style={{ y, scale, opacity }}
+                style={{ opacity: 1 }}
                 className="absolute inset-0 z-0"
             >
                 <div className="absolute inset-0 bg-black/40 z-10" /> {/* Overlay for text contrast */}
