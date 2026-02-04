@@ -5,7 +5,6 @@ import { WorkGrid } from './components/WorkGrid';
 import { AboutSection } from './components/AboutSection';
 import { ServicesSection } from './components/ServicesSection';
 import { CertificatesSection } from './components/CertificatesSection';
-import { PortfolioSection } from './components/PortfolioSection';
 import { ContactSection } from './components/ContactSection';
 
 export function HomePage() {
@@ -53,8 +52,6 @@ export function HomePage() {
 
                     <div id="certificates" className="scroll-mt-24" />
                     <CertificatesSection />
-
-                    <PortfolioSection />
 
                     <div id="contact" className="scroll-mt-24" />
                     <ContactSection />

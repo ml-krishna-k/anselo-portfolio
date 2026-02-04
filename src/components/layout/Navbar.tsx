@@ -1,41 +1,41 @@
 import { Link, useLocation } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import brandLogo from '@/assets/images/brand-logo.png';
 
 const navLinks = [
-    { name: 'Home', path: '#' },
-    { name: 'About', path: '#about' },
-    { name: 'Work', path: '#work' },
-    { name: 'Services', path: '#services' },
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/#about' },
+    { name: 'Work', path: '/#work' },
+    { name: 'Services', path: '/#services' },
 ];
 
 export function Navbar() {
     const location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { scrollY } = useScroll();
 
-    // Change navbar style on scroll
-    const navBackground = useTransform(
-        scrollY,
-        [0, 100],
-        ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.95)']
-    );
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+        // If it's a hash link
+        if (path.includes('#')) {
+            // If we are not on home page, let the link navigation happen (to /#hash)
+            // But if we are on home page, we might want manual scroll or just let browser handle handle anchor
+            // React Router's HashLink or standard anchor work. 
+            // Standard anchor from /#hash works if on /, it just scrolls.
 
-    const navBorder = useTransform(
-        scrollY,
-        [0, 100],
-        ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.1)']
-    );
+            // Simple clean approach: let default behavior happen, but close mobile menu
+            setIsMobileMenuOpen(false);
+        } else {
+            // It's a route link
+            setIsMobileMenuOpen(false);
+        }
+    };
 
     return (
         <motion.header
-            className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg"
-            style={{
-                backgroundColor: navBackground,
-                borderBottom: `1px solid`,
-                borderBottomColor: navBorder,
-            }}
+            className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/90 border-b border-white/10"
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.5 }}
         >
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="flex items-center justify-between h-20">
@@ -48,32 +48,26 @@ export function Navbar() {
                             whileHover={{ rotate: 360 }}
                             transition={{ duration: 0.6 }}
                         />
-                        <span className="text-xl font-bold text-foreground hidden sm:block">
-                            Anselo
+                        <span className="text-xl font-bold text-white hidden sm:block tracking-wide">
+                            ANSELO
                         </span>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center gap-1">
+                    <nav className="hidden md:flex items-center gap-8">
                         {navLinks.map((link) => {
-                            const isActive = location.hash === link.path;
+                            const isActive = location.pathname + location.hash === link.path || (link.path === '/' && location.pathname === '/');
                             return (
                                 <a
                                     key={link.path}
                                     href={link.path}
-                                    className="relative px-4 py-2 rounded-full"
+                                    className="relative group"
                                 >
-                                    <span className={`relative z-10 text-sm font-medium transition-colors ${isActive ? 'text-primary' : 'text-zinc-400 hover:text-white'
+                                    <span className={`text-sm font-bold uppercase tracking-widest transition-colors ${isActive ? 'text-primary' : 'text-zinc-400 hover:text-white'
                                         }`}>
                                         {link.name}
                                     </span>
-                                    {isActive && (
-                                        <motion.div
-                                            layoutId="navbar-indicator"
-                                            className="absolute inset-0 bg-primary/10 rounded-full"
-                                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                        />
-                                    )}
+                                    <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full ${isActive ? 'w-full' : ''}`} />
                                 </a>
                             );
                         })}
@@ -85,7 +79,7 @@ export function Navbar() {
                             href="https://drive.google.com/file/d/1WBzUUc9T34TNzlKA623DNaguKTOR_3HS/view?usp=drive_link"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-6 py-2.5 rounded-full font-semibold text-sm border border-border hover:border-primary hover:bg-primary/5 transition-all"
+                            className="px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest border border-white/20 hover:border-primary hover:text-primary transition-all text-white"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -94,28 +88,24 @@ export function Navbar() {
 
                         <Link to="/contact">
                             <motion.button
-                                className="px-6 py-2.5 bg-primary text-primary-foreground rounded-full font-semibold text-sm hover-lift relative overflow-hidden group"
+                                className="px-8 py-3 bg-white text-black rounded-full font-bold text-xs uppercase tracking-widest hover:bg-primary transition-colors"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <span className="relative z-10">Let's Talk</span>
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-r from-accent via-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity"
-                                    initial={false}
-                                />
+                                Let's Talk
                             </motion.button>
                         </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden relative w-10 h-10 flex items-center justify-center"
+                        className="md:hidden relative w-10 h-10 flex items-center justify-center text-white"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         aria-label="Toggle menu"
                     >
                         <div className="w-6 h-5 flex flex-col justify-between">
                             <motion.span
-                                className="w-full h-0.5 bg-foreground origin-center"
+                                className="w-full h-0.5 bg-white origin-center"
                                 animate={{
                                     rotate: isMobileMenuOpen ? 45 : 0,
                                     y: isMobileMenuOpen ? 9 : 0,
@@ -123,14 +113,14 @@ export function Navbar() {
                                 transition={{ duration: 0.3 }}
                             />
                             <motion.span
-                                className="w-full h-0.5 bg-foreground"
+                                className="w-full h-0.5 bg-white"
                                 animate={{
                                     opacity: isMobileMenuOpen ? 0 : 1,
                                 }}
                                 transition={{ duration: 0.2 }}
                             />
                             <motion.span
-                                className="w-full h-0.5 bg-foreground origin-center"
+                                className="w-full h-0.5 bg-white origin-center"
                                 animate={{
                                     rotate: isMobileMenuOpen ? -45 : 0,
                                     y: isMobileMenuOpen ? -9 : 0,
@@ -144,7 +134,7 @@ export function Navbar() {
 
             {/* Mobile Menu */}
             <motion.div
-                className="md:hidden overflow-hidden"
+                className="md:hidden overflow-hidden bg-black border-t border-white/10"
                 initial={false}
                 animate={{
                     height: isMobileMenuOpen ? 'auto' : 0,
@@ -152,44 +142,39 @@ export function Navbar() {
                 }}
                 transition={{ duration: 0.3 }}
             >
-                <div className="px-6 pb-6 glass-strong border-t border-border">
-                    <nav className="flex flex-col gap-2 pt-4">
-                        {navLinks.map((link, index) => {
-                            const isActive = location.pathname === link.path;
-                            return (
-                                <motion.div
-                                    key={link.path}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={isMobileMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                                    transition={{ delay: index * 0.1 }}
+                <div className="px-6 pb-8 pt-4 flex flex-col items-center gap-6">
+                    <nav className="flex flex-col gap-4 text-center w-full">
+                        {navLinks.map((link, index) => (
+                            <motion.div
+                                key={link.path}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={isMobileMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                <a
+                                    href={link.path}
+                                    className="block p-2 text-xl font-bold uppercase tracking-widest text-white hover:text-primary transition-colors"
+                                    onClick={(e) => handleNavClick(e, link.path)}
                                 >
-                                    <a
-                                        href={link.path}
-                                        className={`block px-4 py-3 rounded-lg text-lg font-medium transition-all ${isActive
-                                            ? 'bg-primary/10 text-primary'
-                                            : 'text-zinc-400 hover:bg-white/5 hover:text-white'
-                                            }`}
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        {link.name}
-                                    </a>
-                                </motion.div>
-                            );
-                        })}
+                                    {link.name}
+                                </a>
+                            </motion.div>
+                        ))}
                     </nav>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={isMobileMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                        transition={{ delay: 0.4 }}
-                        className="mt-6"
+                    <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="w-full">
+                        <button className="w-full px-6 py-4 bg-primary text-black rounded-full font-bold uppercase tracking-widest text-sm">
+                            Let's Talk
+                        </button>
+                    </Link>
+                    <a
+                        href="https://drive.google.com/file/d/1WBzUUc9T34TNzlKA623DNaguKTOR_3HS/view?usp=drive_link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/60 text-sm font-mono uppercase tracking-widest hover:text-white transition-colors"
                     >
-                        <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                            <button className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-full font-semibold text-sm">
-                                Let's Talk
-                            </button>
-                        </Link>
-                    </motion.div>
+                        View Resume
+                    </a>
                 </div>
             </motion.div>
         </motion.header>

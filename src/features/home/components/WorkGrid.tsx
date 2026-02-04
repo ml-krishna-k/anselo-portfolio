@@ -131,7 +131,7 @@ export function WorkGrid() {
                     but framer-motion is requested/used in project.
                     Let's use a simpler infinite scroll valid for all sizes.
                  */}
-                <Marquee speed={30}>
+                <Marquee speed={10}>
                     {workItems.map((item) => (
                         <WorkCard key={`${item.id}-a`} item={item} />
                     ))}
@@ -148,7 +148,7 @@ export function WorkGrid() {
     );
 }
 
-const Marquee = ({ children, speed = 30 }: { children: React.ReactNode, speed?: number }) => {
+const Marquee = ({ children, speed = 50 }: { children: React.ReactNode, speed?: number }) => {
     return (
         <div className="flex overflow-hidden group select-none relative">
             {/* Gradient Masks for Edge Fading */}

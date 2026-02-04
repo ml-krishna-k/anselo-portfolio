@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import heroLoop from '@/assets/videos/hero-loop.mp4';
+import heroLoop from '../../../assets/videos/hero-loop.mp4';
 
 export function DynamicHero() {
     const containerRef = useRef<HTMLDivElement>(null);
