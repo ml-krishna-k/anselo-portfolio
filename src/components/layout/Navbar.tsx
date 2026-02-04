@@ -14,7 +14,7 @@ export function Navbar() {
     const location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    const handleNavClick = (_e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
         // If it's a hash link
         if (path.includes('#')) {
             // If we are not on home page, let the link navigation happen (to /#hash)
