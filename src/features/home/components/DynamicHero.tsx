@@ -7,7 +7,7 @@ export function DynamicHero() {
     const { scrollYProgress } = useScroll();
 
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-    const opacity = useTransform(scrollYProgress, [0.8, 1], [1, 0]);
+    const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.4]); // never hits 0
     const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
     return (
@@ -18,8 +18,8 @@ export function DynamicHero() {
 
             {/* Background Video Loop */}
             <motion.div
-                style={{ opacity: 1 }}
-                className="absolute inset-0 z-0"
+                style={{ y, opacity, scale }}
+                className="absolute inset-0 -z-10"
             >
                 <div className="absolute inset-0 bg-black/40 z-10" /> {/* Overlay for text contrast */}
                 <video
