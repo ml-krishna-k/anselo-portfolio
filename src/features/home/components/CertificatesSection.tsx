@@ -1,5 +1,5 @@
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { MouseEvent } from 'react';
+import type { MouseEvent } from "react";
 
 // Dynamically import all PDF certificates
 const certificateFiles = import.meta.glob('@/assets/certificates/*.pdf', {
