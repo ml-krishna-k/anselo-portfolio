@@ -4,10 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 export function DynamicHero() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"]
-    });
+    const { scrollYProgress } = useScroll();
 
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
     const opacity = useTransform(scrollYProgress, [0.8, 1], [1, 0]);
