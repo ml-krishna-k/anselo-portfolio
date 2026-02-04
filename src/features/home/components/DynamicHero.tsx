@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import heroLoop from '../../../assets/videos/hero-loop.mp4';
+
 
 export function DynamicHero() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -26,7 +26,7 @@ export function DynamicHero() {
             >
                 <div className="absolute inset-0 bg-black/40 z-10" /> {/* Overlay for text contrast */}
                 <video
-                    src={heroLoop}
+                    src="/videos/hero-loop.mp4"
                     autoPlay
                     loop
                     muted
