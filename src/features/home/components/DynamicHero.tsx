@@ -7,13 +7,13 @@ export function DynamicHero() {
     const { scrollYProgress } = useScroll();
 
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-    const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.4]); // never hits 0
+    const opacity = useTransform(scrollYProgress, [0, 1], [1, 1]);
     const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
     return (
         <section
             ref={containerRef}
-            className="relative h-screen w-full overflow-hidden bg-background flex flex-col items-center justify-center sticky top-0 -z-10"
+            className="relative h-screen w-full overflow-hidden bg-background flex flex-col items-center justify-center sticky top-0 z-0"
         >
 
             {/* Background Video Loop */}
