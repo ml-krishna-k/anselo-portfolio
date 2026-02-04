@@ -32,7 +32,7 @@ export function Navbar() {
 
     return (
         <motion.header
-            className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/90 border-b border-white/10"
+            className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black border-b border-white/10"
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}

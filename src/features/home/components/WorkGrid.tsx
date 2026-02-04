@@ -142,7 +142,7 @@ const Carousel3D = ({ items }: { items: WorkItem[] }) => {
             if (container.scrollLeft >= (container.scrollWidth / 2)) {
                 container.scrollLeft = 1; // Reset to start seamlessly
             } else {
-                container.scrollLeft += 2; // Speed of scroll
+                container.scrollLeft += 0.8; // Speed of scroll
             }
             animationFrameId = requestAnimationFrame(scroll);
         };
