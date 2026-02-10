@@ -81,7 +81,7 @@ const workItems: WorkItem[] = [
 
 export function WorkGrid() {
     return (
-        <section className="relative py-24 bg-black overflow-hidden flex flex-col justify-center min-h-[100vh]">
+        <section className="relative py-16 md:py-24 bg-black overflow-hidden flex flex-col justify-center min-h-[80vh] md:min-h-[100vh]">
             {/* Ambient Background */}
             <div className="absolute inset-0 bg-background">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] opacity-20"></div>
@@ -89,13 +89,13 @@ export function WorkGrid() {
                 <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10"></div>
             </div>
 
-            <div className="relative z-20 mb-12 px-6 md:px-12 max-w-[1920px] mx-auto w-full">
-                <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-8 border-b border-white/10 pb-8">
+            <div className="relative z-20 mb-8 md:mb-12 px-4 sm:px-6 md:px-12 max-w-[1920px] mx-auto w-full">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-6 mb-6 md:mb-8 border-b border-white/10 pb-6 md:pb-8">
                     <div>
                         <motion.span
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            className="text-primary font-mono text-sm tracking-[0.2em] uppercase mb-2 block"
+                            className="text-primary font-mono text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-2 block"
                         >
                             Selected Works
                         </motion.span>
@@ -103,7 +103,7 @@ export function WorkGrid() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-5xl md:text-7xl font-bold text-white tracking-tighter"
+                            className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tighter"
                         >
                             FEATURED <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">PROJECTS</span>
                         </motion.h2>
@@ -112,13 +112,13 @@ export function WorkGrid() {
             </div>
 
             {/* 3D Carousel Container */}
-            <div className="relative w-full h-[60vh] md:h-[70vh]">
+            <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh]">
                 <Carousel3D items={workItems} />
             </div>
 
-            <div className="mt-8 text-center relative z-20">
+            <div className="mt-6 md:mt-8 text-center relative z-20">
                 <a href="#contact" className="inline-flex items-center gap-2 group cursor-pointer">
-                    <span className="text-white/80 group-hover:text-white transition-colors uppercase tracking-widest text-sm">View Full Archive</span>
+                    <span className="text-white/80 group-hover:text-white transition-colors uppercase tracking-widest text-xs sm:text-sm">View Full Archive</span>
                     <span className="text-primary group-hover:translate-x-1 transition-transform">→</span>
                 </a>
             </div>
@@ -131,7 +131,7 @@ const Carousel3D = ({ items }: { items: WorkItem[] }) => {
     // Duplicate items to simulate infinite scroll feel
     const extendedItems = [...items, ...items, ...items, ...items];
 
-    // Auto-scroll logic
+    // Auto-scroll logic - slowed down to 11s per item (2s transition + 9s pause)
     useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
@@ -142,7 +142,7 @@ const Carousel3D = ({ items }: { items: WorkItem[] }) => {
             if (container.scrollLeft >= (container.scrollWidth / 2)) {
                 container.scrollLeft = 1; // Reset to start seamlessly
             } else {
-                container.scrollLeft += 0.8; // Speed of scroll
+                container.scrollLeft += 0.15; // Much slower speed - ~11s per item
             }
             animationFrameId = requestAnimationFrame(scroll);
         };
@@ -155,9 +155,9 @@ const Carousel3D = ({ items }: { items: WorkItem[] }) => {
     return (
         <div
             ref={containerRef}
-            className="flex items-center gap-4 md:gap-12 overflow-x-auto overflow-y-hidden no-scrollbar px-[50vw] snap-none h-full"
+            className="flex items-center gap-2 md:gap-12 overflow-x-auto overflow-y-hidden no-scrollbar px-[45vw] md:px-[50vw] snap-none h-full touch-pan-x"
             style={{
-                perspective: '1200px',
+                perspective: '800px',
                 perspectiveOrigin: '50% 50%',
             }}
         >
@@ -181,17 +181,17 @@ const CarouselItem = ({ item, containerRef }: { item: WorkItem, containerRef: an
         offset: ["start end", "end start"]
     });
 
-    // Calculate transforms based on position
+    // Calculate transforms based on position - reduced for mobile
     // Center of view is approx scrollXProgress 0.5
 
-    // Rotate Y: Left items rotate positive, Right items rotate negative
-    const rotateY = useTransform(scrollXProgress, [0.3, 0.5, 0.7], [45, 0, -45]);
-    const z = useTransform(scrollXProgress, [0.3, 0.5, 0.7], [-300, 0, -300]);
-    const scale = useTransform(scrollXProgress, [0.3, 0.5, 0.7], [0.8, 1.1, 0.8]);
-    const opacity = useTransform(scrollXProgress, [0.2, 0.5, 0.8], [0.5, 1, 0.5]);
+    // Rotate Y: Left items rotate positive, Right items rotate negative (less rotation on mobile)
+    const rotateY = useTransform(scrollXProgress, [0.3, 0.5, 0.7], [30, 0, -30]);
+    const z = useTransform(scrollXProgress, [0.3, 0.5, 0.7], [-200, 0, -200]);
+    const scale = useTransform(scrollXProgress, [0.3, 0.5, 0.7], [0.85, 1.05, 0.85]);
+    const opacity = useTransform(scrollXProgress, [0.2, 0.5, 0.8], [0.6, 1, 0.6]);
 
     return (
-        <div style={{ perspective: '1200px' }} className="h-full flex items-center justify-center py-10">
+        <div style={{ perspective: '800px' }} className="h-full flex items-center justify-center py-6 md:py-10">
             <motion.div
                 ref={ref}
                 style={{
@@ -201,7 +201,7 @@ const CarouselItem = ({ item, containerRef }: { item: WorkItem, containerRef: an
                     opacity,
                     transformStyle: 'preserve-3d',
                 }}
-                className="relative flex-none w-[85vw] md:w-[600px] aspect-video md:aspect-[16/10] rounded-2xl overflow-hidden cursor-pointer group border border-white/10 bg-black shadow-2xl"
+                className="relative flex-none w-[80vw] sm:w-[70vw] md:w-[600px] aspect-video md:aspect-[16/10] rounded-xl md:rounded-2xl overflow-hidden cursor-pointer group border border-white/10 bg-black shadow-2xl"
                 onHoverStart={() => setIsHovered(true)}
                 onHoverEnd={() => setIsHovered(false)}
             >
@@ -219,15 +219,15 @@ const CarouselItem = ({ item, containerRef }: { item: WorkItem, containerRef: an
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 transition-opacity duration-300 z-10" />
 
                 {/* Content */}
-                <div className="absolute inset-0 p-8 flex flex-col justify-end z-30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="absolute inset-0 p-4 sm:p-6 md:p-8 flex flex-col justify-end z-30 transform translate-y-2 md:translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <motion.span
-                        className="text-primary font-mono text-xs tracking-[0.2em] uppercase mb-2"
+                        className="text-primary font-mono text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-1 sm:mb-2 block"
                         animate={{ opacity: isHovered ? 1 : 0.7, y: isHovered ? 0 : 5 }}
                     >
                         {item.category}
                     </motion.span>
-                    <h3 className="text-3xl md:text-4xl font-black text-white drop-shadow-lg mb-2">{item.title}</h3>
-                    <p className="text-zinc-400 text-sm md:text-base max-w-[90%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white drop-shadow-lg mb-1 sm:mb-2 leading-tight">{item.title}</h3>
+                    <p className="text-zinc-400 text-xs sm:text-sm md:text-base max-w-[95%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 line-clamp-2">
                         {item.description}
                     </p>
                 </div>

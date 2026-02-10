@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { LandingScreen } from './components/LandingScreen';
 import { DynamicHero } from './components/DynamicHero';
+import { ShowreelSection } from './components/ShowreelSection';
 import { WorkGrid } from './components/WorkGrid';
+import { VideoGrid } from './components/VideoGrid';
 import { AboutSection } from './components/AboutSection';
 import { ServicesSection } from './components/ServicesSection';
 import { CertificatesSection } from './components/CertificatesSection';
@@ -39,6 +41,9 @@ export function HomePage() {
             >
                 <DynamicHero />
 
+                {/* Showreel - plays all 7 videos sequentially */}
+                <ShowreelSection />
+
                 {/* Content Card - Slides over the fixed Hero */}
                 <div className="relative z-10 bg-background-secondary rounded-t-[3rem] shadow-2xl -mt-8 border-t border-white/5">
                     <div id="about" className="scroll-mt-24" />
@@ -46,6 +51,11 @@ export function HomePage() {
 
                     <div id="work" className="scroll-mt-24" />
                     <WorkGrid />
+
+                    {/* Video Grid - 3D video carousel */}
+                    <VideoGrid />
+
+
 
                     <div id="services" className="scroll-mt-24" />
                     <ServicesSection />
