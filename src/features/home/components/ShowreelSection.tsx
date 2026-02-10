@@ -116,7 +116,7 @@ export function ShowreelSection() {
     return (
         <section
             ref={containerRef}
-            className="relative min-h-screen w-full overflow-hidden bg-black flex items-center justify-center py-24 md:py-32"
+            className="relative min-h-screen w-full overflow-hidden bg-black flex items-center justify-center py-16 sm:py-20 md:py-24 lg:py-32"
         >
             {/* Ambient Background */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] opacity-20"></div>
@@ -127,22 +127,22 @@ export function ShowreelSection() {
             {/* Bottom gradient overlay */}
             <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10"></div>
 
-            <div className="relative z-20 w-full max-w-[1600px] mx-auto px-6 md:px-12">
+            <div className="relative z-20 w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="mb-16 text-center"
+                    className="mb-8 sm:mb-12 md:mb-16 text-center"
                 >
-                    <span className="text-primary font-mono text-sm tracking-[0.2em] uppercase mb-4 block">
+                    <span className="text-primary font-mono text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
                         My Showreel
                     </span>
-                    <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-tighter px-4">
                         CREATIVE <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">VISION</span>
                     </h2>
-                    <p className="text-zinc-400 mt-6 text-lg max-w-2xl mx-auto">
+                    <p className="text-zinc-400 mt-4 sm:mt-6 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
                         A curated collection of my finest work, showcasing the art of visual storytelling
                     </p>
                 </motion.div>
@@ -150,13 +150,13 @@ export function ShowreelSection() {
                 {/* Video Container */}
                 <motion.div
                     style={{ y, opacity, scale }}
-                    className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+                    className="relative w-full aspect-video rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-2xl border border-white/10"
                 >
                     {/* Glow effect */}
                     <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 blur-xl opacity-50 z-0"></div>
 
                     {/* Video Container */}
-                    <div className="relative z-10 w-full h-full bg-black rounded-2xl overflow-hidden">
+                    <div className="relative z-10 w-full h-full bg-black rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden">
                         <video
                             key={currentVideo.id}
                             ref={videoRef}
@@ -178,16 +178,16 @@ export function ShowreelSection() {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ duration: 0.5 }}
-                                className="absolute bottom-0 left-0 right-0 p-8 md:p-12 z-20"
+                                className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 lg:p-12 z-20"
                             >
                                 <div className="max-w-2xl">
-                                    <span className="text-primary font-mono text-xs md:text-sm tracking-[0.2em] uppercase mb-3 block">
+                                    <span className="text-primary font-mono text-[10px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-2 sm:mb-3 block">
                                         {currentVideo.category}
                                     </span>
-                                    <h3 className="text-3xl md:text-5xl font-black text-white mb-3 drop-shadow-lg">
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-white mb-2 sm:mb-3 drop-shadow-lg leading-tight">
                                         {currentVideo.title}
                                     </h3>
-                                    <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
+                                    <p className="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed line-clamp-2 sm:line-clamp-none">
                                         {currentVideo.description}
                                     </p>
                                 </div>
@@ -195,9 +195,9 @@ export function ShowreelSection() {
                         </AnimatePresence>
 
                         {/* Video Progress Indicator - Top Right */}
-                        <div className="absolute top-8 right-8 z-20">
-                            <div className="bg-black/60 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
-                                <span className="text-white font-mono text-sm">
+                        <div className="absolute top-4 sm:top-6 md:top-8 right-4 sm:right-6 md:right-8 z-20">
+                            <div className="bg-black/60 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 border border-white/10">
+                                <span className="text-white font-mono text-xs sm:text-sm">
                                     {currentVideoIndex + 1} / {videoSegments.length}
                                 </span>
                             </div>
@@ -211,15 +211,15 @@ export function ShowreelSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="mt-8 flex justify-center gap-3"
+                    className="mt-6 sm:mt-8 flex justify-center gap-2 sm:gap-3"
                 >
                     {videoSegments.map((_, index) => (
                         <button
                             key={index}
                             onClick={() => setCurrentVideoIndex(index)}
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentVideoIndex
-                                ? 'bg-primary w-8'
-                                : 'bg-white/30 hover:bg-white/50'
+                            className={`h-2 rounded-full transition-all duration-300 ${index === currentVideoIndex
+                                    ? 'bg-primary w-6 sm:w-8'
+                                    : 'bg-white/30 hover:bg-white/50 w-2'
                                 }`}
                             aria-label={`Go to video ${index + 1}`}
                         />

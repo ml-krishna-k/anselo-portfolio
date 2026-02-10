@@ -4,12 +4,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 // Imports for local assets
 // Using relative paths to ensure resolution
 import work1 from '../../../assets/works/AUTOMOBILE PHOTOGRAPHY 04.jpg';
-import work2 from '../../../assets/works/BTS PIC 03.PNG';
-import work3 from '../../../assets/works/BTS PIC 04.jpg';
-import work4 from '../../../assets/works/BTS PIC 05.jpg';
-import work5 from '../../../assets/works/BTS PIC.jpg';
-import work6 from '../../../assets/works/BTS PICS 02.jpg';
-import work7 from '../../../assets/works/GULF AD FRAMES.JPG';
+import work2 from '../../../assets/works/BTS PIC 05.jpg';
+import work3 from '../../../assets/works/BTS PIC.jpg';
+import work4 from '../../../assets/works/GULF AD FRAMES.JPG';
 
 interface WorkItem {
     id: number;
@@ -30,52 +27,28 @@ const workItems: WorkItem[] = [
         year: "2024"
     },
     {
-        id: 7,
+        id: 2,
         title: "Gulf Campaign",
         category: "Advertising",
-        image: work7,
+        image: work4,
         description: "Global advertising campaign visuals and direction.",
         year: "2024"
     },
     {
-        id: 2,
-        title: "Behind The Scenes",
-        category: "Production",
-        image: work2,
-        description: "The chaos and craft behind the perfect shot.",
-        year: "2023"
-    },
-    {
-        id: 5,
+        id: 3,
         title: "Director's Vision",
         category: "Direction",
-        image: work5,
+        image: work3,
         description: "Orchestrating visual narratives from concept to screen.",
         year: "2023"
-    },
-    {
-        id: 3,
-        title: "Set Dynamics",
-        category: "BTS",
-        image: work3,
-        description: "Capturing the energy of collaborative filmmaking.",
-        year: "2023"
-    },
-    {
-        id: 6,
-        title: "Studio Life",
-        category: "Photography",
-        image: work6,
-        description: "Professional studio sessions and lighting setups.",
-        year: "2022"
     },
     {
         id: 4,
         title: "Cinematic Frames",
         category: "Film",
-        image: work4,
+        image: work2,
         description: "Raw cinematic moments frozen in time.",
-        year: "2022"
+        year: "2023"
     }
 ];
 
@@ -117,7 +90,12 @@ export function WorkGrid() {
             </div>
 
             <div className="mt-6 md:mt-8 text-center relative z-20">
-                <a href="#contact" className="inline-flex items-center gap-2 group cursor-pointer">
+                <a
+                    href="https://drive.google.com/drive/folders/1wGyXvfnSRr4DUJCw28Ttqo2Ttwl0rxcB"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 group cursor-pointer"
+                >
                     <span className="text-white/80 group-hover:text-white transition-colors uppercase tracking-widest text-xs sm:text-sm">View Full Archive</span>
                     <span className="text-primary group-hover:translate-x-1 transition-transform">→</span>
                 </a>

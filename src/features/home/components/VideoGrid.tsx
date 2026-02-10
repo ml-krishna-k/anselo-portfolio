@@ -116,7 +116,12 @@ export function VideoGrid() {
             </div>
 
             <div className="mt-6 md:mt-8 text-center relative z-20">
-                <a href="#contact" className="inline-flex items-center gap-2 group cursor-pointer">
+                <a
+                    href="https://drive.google.com/drive/folders/1wGyXvfnSRr4DUJCw28Ttqo2Ttwl0rxcB"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 group cursor-pointer"
+                >
                     <span className="text-white/80 group-hover:text-white transition-colors uppercase tracking-widest text-xs sm:text-sm">View Full Archive</span>
                     <span className="text-primary group-hover:translate-x-1 transition-transform">→</span>
                 </a>

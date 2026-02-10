@@ -12,7 +12,7 @@ export function ContactPage() {
         e.preventDefault();
         const subject = `Portfolio Inquiry from ${formData.name}`;
         const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
-        window.location.href = `mailto:anselo.work@gmail.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:business.anselo@gmail.com?subject=${subject}&body=${body}`;
     };
 
     return (
@@ -46,7 +46,7 @@ export function ContactPage() {
                             </div>
                             <div>
                                 <p className="text-xs text-zinc-500 uppercase tracking-widest mb-1">Email Me</p>
-                                <a href="mailto:anselo.work@gmail.com" className="text-lg font-medium hover:text-primary transition-colors">anselo.work@gmail.com</a>
+                                <a href="mailto:business.anselo@gmail.com" className="text-lg font-medium hover:text-primary transition-colors">business.anselo@gmail.com</a>
                             </div>
                         </div>
                     </div>
